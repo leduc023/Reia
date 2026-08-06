@@ -1,0 +1,206 @@
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #9333ea;
+  --light-color: #ffffff;
+  --dark-color: #111827;
+  --muted-color: #6b7280;
+  --bg-gradient: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(147,51,234,0.85));
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Poppins', sans-serif; 
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background: #f8f9ff;
+  color: #1f2937;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  background: rgba(10, 25, 47, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+  font-family: var(--font-secondary);
+  letter-spacing: 0.05em;
+}
+
+/* Logo image next to brand */
+.navbar-brand .logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.18);
+}
+
+.nav-link {
+  color: rgba(255,255,255,0.85) !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color) !important;
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-color) !important;
+    transform: translateY(-1px);
+  }
+
+  .navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+  }
+
+  .navbar-nav .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 2px;
+  }
+
+.header-section {
+  min-height: 100vh;
+  background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.header-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.06), transparent 45%);
+}
+
+/* IntersectionObserver reveal animation */
+.hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  will-change: opacity, transform;
+}
+.show {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.text-gradient {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-custom {
+  background: var(--bg-gradient);
+  color: var(--light-color);
+  border: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-custom:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(37,99,235,0.18);
+}
+
+.feature-card .card,
+.pillar-box .card,
+.about-card,
+.download-card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.feature-card .card:hover,
+.pillar-box .card:hover,
+.about-card:hover,
+.download-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.icon-box {
+  width: 70px;
+  height: 70px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-color);
+}
+
+.feature-card .icon-box {
+  margin: 0 auto;
+}
+
+.pillar-image {
+  min-height: 220px;
+  background-size: cover;
+  background-position: center;
+}
+
+.about-card {
+  background: #ffffff;
+}
+
+.bg-primary {
+  background: var(--bg-gradient) !important;
+}
+
+footer {
+  background: #0f172a;
+}
+
+@media (max-width: 991.98px) {
+  .header-section {
+    min-height: 80vh;
+  }
+
+  .hero-content .display-5 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .header-section {
+    background-position: top;
+  }
+
+  .feature-card,
+  .pillar-box {
+    text-align: center;
+  }
+
+  .feature-card .card,
+  .pillar-box .card {
+    padding: 1rem;
+  }
+}
