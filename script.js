@@ -1,14 +1,4 @@
 $(document).ready(function() {
-  // Reveal sections on scroll with jQuery animation
-  function revealSection(selector, delay) {
-    $(selector).css({opacity: 0, position: 'relative', top: '30px'}).each(function(index) {
-      $(this).delay(delay + index * 120).animate({opacity: 1, top: 0}, 800);
-    });
-  }
-
-  revealSection('.feature-card', 100);
-  revealSection('.pillar-box', 120);
-
   // Smooth scroll for anchor links
   $('a.nav-link').on('click', function(event) { 
     var target = $(this).attr('href');
@@ -31,16 +21,18 @@ $(document).ready(function() {
   // Fade in hero text on load
   $('.hero-content').css({opacity: 0}).animate({opacity: 1}, 900);
 
-  // IntersectionObserver: reveal sections on scroll (mirrors index.php behavior)
+  // IntersectionObserver: reveal cards on scroll
   (function() {
-    const sectionIds = ['home', 'features', 'pillars', 'about', 'download'];
+    // Mark all cards as hidden initially
+    const elementsToObserve = [
+      '.feature-card',
+      '.pillar-box',
+      '.about-card',
+      '.download-card'
+    ];
 
-    // Ensure sections are marked hidden (force add)
-    sectionIds.forEach(function(id) {
-      const section = document.getElementById(id);
-      if (section) {
-        section.classList.add('hidden');
-      }
+    elementsToObserve.forEach(function(selector) {
+      $(selector).addClass('hidden');
     });
 
     // Slight delay to allow layout/images to stabilize
@@ -49,15 +41,16 @@ $(document).ready(function() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('show');
-          } else {
-            entry.target.classList.remove('show');
+            observer.unobserve(entry.target); // Stop observing after revealing
           }
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+      }, { threshold: 0.15, rootMargin: '0px 0px -15% 0px' });
 
-      const hiddenElements = document.querySelectorAll('.hidden');
-      hiddenElements.forEach((el) => observer.observe(el));
-    }, 80);
+      // Observe all card elements
+      document.querySelectorAll('.feature-card, .pillar-box, .about-card, .download-card').forEach((el) => {
+        observer.observe(el);
+      });
+    }, 100);
   })();
 
   // Close mobile menu after clicking a nav link (when toggler visible)
